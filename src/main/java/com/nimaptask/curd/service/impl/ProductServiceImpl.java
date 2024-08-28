@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long productId) {
 
         Product product = productRepository.findById(productId).orElseThrow(
-                () ->new ResourceNotFoundException("Category is Not exists with given id: "+ productId)
+                () ->new ResourceNotFoundException("Product is Not exists with given id: "+ productId)
         );
 
         productRepository.deleteById(productId);
