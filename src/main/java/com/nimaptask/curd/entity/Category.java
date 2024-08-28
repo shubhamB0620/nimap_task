@@ -23,8 +23,11 @@ public class Category {
     @Column(name = "category_Name")
     private String name;
 
-//    @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "FK_Category", referencedColumnName = "name")
-//    private List<Product> products;
+    @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_Category",referencedColumnName = "id")
+    private List<Product> products;
 
+    public Category(Long id, String name) {
+        return;
+    }
 }
