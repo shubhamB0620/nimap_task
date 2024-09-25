@@ -44,6 +44,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<ProductDto> getAllProducts(Pageable pageable) {
+        Page<Product> categoryPage = productRepository.findAll(pageable);
+        return categoryPage.map(ProductMapper::mapToProductDto);
+    }
+
+    @Override
     public ProductDto updateProduct(Long productId, ProductDto updatedProduct) {
         Product product = productRepository.findById(productId).orElseThrow(
                 () ->new ResourceNotFoundException("Product is Not exists with given id: "+ productId)
