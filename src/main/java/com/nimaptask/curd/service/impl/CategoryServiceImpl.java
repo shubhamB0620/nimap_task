@@ -7,6 +7,8 @@ import com.nimaptask.curd.mapper.CategoryMapper;
 import com.nimaptask.curd.repository.CategoryRepository;
 import com.nimaptask.curd.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +40,12 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream().map((category)-> CategoryMapper.mapToCategoryDto(category))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<CategoryDto> getAllCategories(Pageable pageable) {
+        Page<Category> categoryPage = categoryRepository.findAll(pageable);
+        return categoryPage.map(CategoryMapper::mapToCategoryDto);
     }
 
     @Override

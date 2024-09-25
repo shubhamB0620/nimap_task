@@ -7,6 +7,9 @@ import com.nimaptask.curd.mapper.ProductMapper;
 import com.nimaptask.curd.repository.ProductRepository;
 import com.nimaptask.curd.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

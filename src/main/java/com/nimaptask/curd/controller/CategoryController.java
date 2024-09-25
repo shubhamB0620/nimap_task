@@ -3,6 +3,9 @@ package com.nimaptask.curd.controller;
 import com.nimaptask.curd.dto.CategoryDto;
 import com.nimaptask.curd.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +32,14 @@ public class CategoryController {
         return ResponseEntity.ok(categoryDto);
     }
 
-    //Build Get All Category REST API
+    //Build Get All Category REST API with Pagination
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> getAllCategory(){
-        List<CategoryDto> category = categoryService.getAllCategory();
-        return ResponseEntity.ok(category);
+    public ResponseEntity<Page<CategoryDto>> getAllCategory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CategoryDto> categoryPage = categoryService.getAllCategories(pageable);
+        return ResponseEntity.ok(categoryPage);
     }
 
     // Build Update Category REST API
